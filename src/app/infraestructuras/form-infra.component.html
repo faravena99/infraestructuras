@@ -1,0 +1,162 @@
+<div class="card bg-dark text-white">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+      <form #infraForm="ngForm" autocomplete="on">
+       
+        <div class="form-group row">
+          <label for="rSocial" class="col-form-label col-sm-2">Razón Social</label>
+          <div class="col-sm-6">
+            <select [compareWith]="compararCliente" class="form-control" [(ngModel)]="infraestructura.cliente" #rsocial="ngModel" required name="rSocial" style="width: 300px;">
+              <option [ngValue]="undefined">-Seleccionar una razón social-</option>
+              <option *ngFor="let cliente of clientes" [ngValue]="cliente">{{cliente.rSocial}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="rsocial.invalid && (rsocial.dirty || rsocial.touched)">
+              <div *ngIf="rsocial.errors.required">
+                El campo razón social no puede estar vacío
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="tramo" class="col-form-label col-sm-2">Tramo</label>
+            <div class="col-sm-6">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="infraestructura.tramo"
+                name="tramo"
+                #tramo="ngModel"
+                required
+              />
+              <div class="alert alert-danger" *ngIf="tramo.invalid && (tramo.dirty || tramo.touched)">
+                <div *ngIf="tramo.errors.required">
+                  Tramo no puede estar vacío
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="tipoEstructura" class="col-form-label col-sm-2">Tipo Estructura</label>
+            <div class="col-sm-6">
+              <select [compareWith]="CompararTipoEstructura" class="form-control" [(ngModel)]="infraestructura.tipoEstructura" required #tipes="ngModel" name="tipoEstructura" style="width:300px;">
+                <option [ngValue]="undefined">-Seleccionar un tipo estructura-</option>
+                <option *ngFor="let tipoEstructura of tipoEstructuras" [ngValue]="tipoEstructura">{{tipoEstructura.estructura}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="tipes.invalid && (tipes.dirty || tipes.touched)">
+                <div *ngIf="tipes.errors.required">
+                  El campo tipo estructura no puede estar vacío
+                </div>
+              </div>
+            </div>
+          </div>
+   
+          <div class="form-group row">
+            <label for="nombreEstructura" class="col-form-label col-sm-2">Nombre Estructura</label>
+            <div class="col-sm-6">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="infraestructura.nombreEstructura"
+                name="nombreEstructura"
+                required #nomest="ngModel"
+              />
+              <div class="alert alert-danger" *ngIf="nomest.invalid && (nomest.dirty || nomest.touched)">
+                <div *ngIf="nomest.errors.required">
+                  Nombre estructura no puede estar vacío
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="kilometro" class="col-form-label col-sm-2">Kilómetro</label>
+            <div class="col-sm-6">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="infraestructura.kilometro"
+                name="kilometro"
+                required
+                #kilometro="ngModel"
+              />
+              <div class="alert alert-danger" *ngIf="kilometro.invalid && (kilometro.dirty || kilometro.touched)">
+                <div *ngIf="kilometro.errors.required">
+                  Kilómetro no puede estar vacío
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="region" class="col-form-label col-sm-2">Región</label>
+            <div class="col-sm-6">
+              <select [compareWith]="CompararRegion" class="form-control" [(ngModel)]="infraestructura.region" required #region="ngModel" name="region" style="width: 300px;">
+                <option [ngValue]="undefined">-Seleccionar una región-</option>
+                <option *ngFor="let region of regiones" [ngValue]="region">{{region.nombre_region}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="region.invalid && (region.dirty || region.touched)">
+                <div *ngIf="region.errors.required">
+                  El campo región social no puede estar vacío
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="provincia" class="col-form-label col-sm-2">Provincia</label>
+            <div class="col-sm-6">
+              <select [compareWith]="CompararProvincia" class="form-control" [(ngModel)]="infraestructura.provincia" name="provincia" required #provincia="ngModel" style="width: 300px;">
+                <option [ngValue]="undefined">-Seleccionar una provincia-</option>
+                <option *ngFor="let provincia of provincias" [ngValue]="provincia">{{provincia.nombre_provincia}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="provincia.invalid && (provincia.dirty || provincia.touched)">
+                <div *ngIf="provincia.errors.required">
+                  El campo provincia social no puede estar vacío
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="visita" class="col-form-label col-sm-2">Visita</label>
+            <div class="col-sm-6">
+              <select [compareWith]="CompararVisita" class="form-control" [(ngModel)]="infraestructura.visita" required #visita="ngModel" name="visita" style="width: 300px;">
+                <option [ngValue]="undefined">-Seleccionar una visita-</option>
+                <option *ngFor="let visita of visitas" [ngValue]="visita">{{visita.tipo_visita}}</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="visita.invalid && (visita.dirty || visita.touched)">
+                <div *ngIf="visita.errors.required">
+                  El visita no puede estar vacío
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        <div class="form-group row">
+            <div class="row col-sm-6">
+              <button
+                class="btn btn-primary"
+                role="button"
+                (click)='create()'
+                *ngIf="!infraestructura.id else elseBlock"
+                [disabled]="!infraForm.form.valid"
+              >Crear</button>
+              
+              <div>  
+                <button class="btn btn-primary" role="button" [routerLink]= "['/infraestructuras']">Volver</button>
+              </div>
+
+              <ng-template #elseBlock>
+                <button
+                  class="btn btn-primary"
+                  role="button"
+                  (click)='update()'
+                  [disabled]="!infraForm.form.valid"
+                >Editar</button>
+              </ng-template>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>

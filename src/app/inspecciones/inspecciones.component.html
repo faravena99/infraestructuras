@@ -1,0 +1,71 @@
+<detalle-inspeccion *ngIf="inspeccionSeleccionado" [inspeccion]="inspeccionSeleccionado"></detalle-inspeccion>
+
+<div class="card border-primary mb-3">
+    <div class="card-header">Inspecciones</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Listado de Inspecciones</h5>
+        <div class="my-2 text-left">
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]= "['/inspecciones/form-ins']">Añadir registro para foto</button>
+        </div>
+        <div class="my-2 text-right">
+            <button class="btn btn-info btn-primary" type="button" (click)="generarPDF"></button>
+        </div>
+
+        <div *ngIf= "inspecciones?.length == 0" class="alert alert-info">
+            No hay registros en la base de datos!
+        </div>
+
+        <table class="table table-bordered table-striped" *ngIf= "inspecciones?.length>0">
+            <thead>
+                <tr>
+                    <th>Cargar Foto</th>
+                    <th>Cliente</th>
+                    <th>Tipo Estructura</th>            
+                    <th>Nombre Estructura</th>
+                    <th>Fecha</th>
+                    <th>Vista Foto</th>
+                    <th>Observación</th>
+                    <!-- <th>Foto</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor= "let inspeccion of inspecciones">
+                    <td>
+                        <!-- <img (click)="abrirModal(inspeccion)" *ngIf="inspeccion?.foto"
+                        src="{{urlBackend}}/api/uploads/img/{{inspeccion.foto}}" alt="{{inspeccion.foto}}" class="img-thumbnail rounded"
+                        style="width:64px; cursor: pointer;"> -->
+
+                         <img (click)="abrirModal(inspeccion)" *ngIf="inspeccion?.foto"
+                        src="http://localhost:8080/api/uploads/img/{{inspeccion.foto}}" alt="{{inspeccion.foto}}" class="img-thumbnail rounded"
+                        style="width:64px; cursor: pointer;">
+            
+                        <img (click)="abrirModal(inspeccion)" *ngIf="!inspeccion?.foto"
+                          src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="img-thumbnail rounded"
+                          style="width:64px; cursor: pointer;"> 
+<!-- 
+                          <img (click)="abrirModal(inspeccion)" *ngIf="!inspeccion?.foto"
+                          src="{{urlBackend}}/images/no-usuario.png" alt="Sin foto" class="img-thumbnail rounded"
+                          style="width:64px; cursor: pointer;">
+                        </td> -->
+                       
+                    <td>{{ inspeccion.cliente.rSocial }}</td>
+                    <td>{{ inspeccion.tipoEstructura.estructura }}</td>
+                    <td>{{ inspeccion.nombreEstructura }}</td>
+                    <td>{{ inspeccion.fechaInspeccion }}</td>
+                    <td>{{ inspeccion.fotografia.tipo_foto}}</td>
+                    <td>{{ inspeccion.descripcion }}</td>
+                    <!-- <td>{{ inspeccion.foto }}</td> -->
+                   
+                    <td>
+                        <button type="button" name="editar" [routerLink]="['/inspecciones/form-ins', inspeccion.id]" class="btn btn-success btn-sm">editar</button>
+                    </td>
+                    <td>
+                        <button type="button" name="eliminar" (click)='delete(inspeccion)' class="btn btn-danger btn-sm">eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,145 @@
+<div class="card bg-dark text-white">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+      <form #clienteForm="ngForm" autocomplete="on">
+        <div class="form-group row">
+          <label for="rSocial" class="col-form-label col-sm-2"
+            >Razón social</label>
+          <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cliente.rSocial"
+              name="rSocial"
+              required #nombre="ngModel"/>
+
+            <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div *ngIf="nombre.errors.required">
+                El campo Razón social no puede estar vacío
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="rut" class="col-form-label col-sm-2">R.U.T</label>
+          <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cliente.rut"
+              name="rut"
+              required pattern="\d{3,8}-[\d|kK]{1}" #rut="ngModel"/>
+
+            <div class="alert alert-danger" *ngIf="rut.invalid && (rut.dirty || rut.touched)">
+              <div *ngIf="rut.errors.required">
+                El campo RUT no puede estar vacío
+              </div>
+              <div *ngIf="rut.errors.pattern">
+                El campo RUT solo acepta numeros y el formato ejemplo[11111111-1]
+              </div>
+            </div>
+           
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="direccion" class="col-form-label col-sm-2">Dirección</label>
+          <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cliente.direccion"
+              name="direccion"
+              required #direccion="ngModel"/>
+
+            <div class="alert alert-danger" *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
+              <div *ngIf="direccion.errors.required">
+                El campo Dirección no puede estar vacío
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="nombreCliente" class="col-form-label col-sm-2"
+            >Contacto</label>
+          <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cliente.nombreCliente"
+              name="nombreCliente"
+              required #contacto="ngModel"/>
+            <div class="alert alert-danger" *ngIf="contacto.invalid && (contacto.dirty || contacto.touched)">
+              <div *ngIf="contacto.errors.required">
+                El campo Contacto no puede estar vacío
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="celular" class="col-form-label col-sm-2">Celular</label>
+          <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cliente.celular"
+              name="celular"
+              required #celular="ngModel"/>
+              <div class="alert alert-danger" *ngIf="celular.invalid && (celular.dirty || celular.touched)">
+                <div *ngIf="celular.errors.required">
+                  El campo Celular no puede estar vacío
+                </div>
+              </div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="email" class="col-form-label col-sm-2">Email</label>
+          <div class="col-sm-5">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="cliente.email"
+              name="email"
+              required #email="ngModel" email/>
+              <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                <div *ngIf="email.errors.required">
+                  El campo Email no puede estar vacío
+                </div>
+                <div *ngIf="email.errors.email">
+                  El email debe tener un formato correcto
+                </div>
+              </div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <div class="row col-sm-6">
+            <button
+              class="btn btn-primary"
+              role="button"
+              (click)="create()"
+              *ngIf="!cliente.id else elseBlock"
+             [disabled]="!clienteForm.form.valid"
+            >Crear</button>
+            <div>  
+              <button class="btn btn-primary" role="button" [routerLink]= "['/clientes']">Volver</button>
+            </div>
+            <ng-template #elseBlock>
+              <button
+                class="btn btn-primary"
+                role="button"
+                (click)="update()"
+                [disabled]="!clienteForm.form.valid"
+                >Editar
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

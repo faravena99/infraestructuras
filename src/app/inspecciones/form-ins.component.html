@@ -1,0 +1,136 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+
+    <form #inpeccionForm="ngForm" autocomplete="on">
+     
+      <div class="form-group row">
+        <label for="cliente" class="col-form-label col-sm-2">Razón Social</label>
+        <div class="col-sm-6">
+          <select [compareWith]="CompararCliente" class="form-control" [(ngModel)]="inspeccion.cliente" name="cliente" #rsocial="ngModel" required style="width: 300px;">
+            <option [ngValue]="undefined">- Seleccionar una concesionaria-</option>
+            <option *ngFor="let cliente of clientes" [ngValue]="cliente">{{cliente.rSocial}}</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="rsocial.invalid && (rsocial.dirty || rsocial.touched)">
+            <div *ngIf="rsocial.errors.required">
+             El campo razón social no puede estar vacío
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="form-group row">
+        <label for="cliente" class="col-form-label col-sm-2">Tipo Estructura</label>
+        <div class="col-sm-6">
+          <select [compareWith]="CompararTipoEstructura" class="form-control" [(ngModel)]="inspeccion.tipoEstructura" name="tipoEstructuras" #tipoes="ngModel" required style="width: 300px;">
+            <option [ngValue]="undefined">- Seleccionar un tipo de estructura ---</option>
+            <option *ngFor="let tipoEstructura of tipoEstructuras" [ngValue]="tipoEstructura">{{tipoEstructura.estructura}}</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="tipoes.invalid && (tipoes.dirty || tipoes.touched)">
+            <div *ngIf="tipoes.errors.required">
+             El campo tipo estructura no puede estar vacío
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="nombreEstructura" class="col-form-label col-sm-2"
+          >Nombre Estructura</label>
+        <div class="col-sm-6">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspeccion.nombreEstructura"
+            name="nombreEstructura"
+            #nombreEstructura="ngModel"
+            required #nomes="ngModel"
+            style="width: 300px;"
+          />
+          <div class="alert alert-danger" *ngIf="nomes.invalid && (nomes.dirty || nomes.touched)">
+            <div *ngIf="nomes.errors.required">
+             El campo Nombre estructura no puede estar vacío
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fechaInspeccion" class="col-form-label col-sm-2"
+          >Fecha Inspección</label>
+        <div class="col-sm-6">
+          <input [matDatepicker]="myDatepicker"  [(ngModel)]="inspeccion.fechaInspeccion" name="fechaInspeccion" required #fecha="ngModel" style="display:inline; width: 100px;">
+     
+            <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>  
+            <mat-datepicker #myDatepicker></mat-datepicker>
+          
+  
+          <div class="alert alert-danger" *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+            <div *ngIf="fecha.errors.required">
+             El campo fecha inspección no puede estar vacío
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label form="descripcion" class="col-form-label col-sm-2"
+          >Observación</label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="inspeccion.descripcion"
+            name="descripcion"
+            #descripcion="ngModel"
+            style="width: 300px;"
+          />
+          
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="tipo_foto" class="col-form-label col-sm-2">Fotografía</label>
+        <div class="col-sm-6">
+          <select [compareWith]="CompararFotografia" class="form-control" [(ngModel)]="inspeccion.fotografia" #foto="ngModel" required name="tipo_foto" style="width: 300px;">
+            <option [ngValue]="undefined">--- Seleccionar una vista---</option>
+            <option *ngFor="let fotografia of fotografias" [ngValue]="fotografia">{{fotografia.tipo_foto}}</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="foto.invalid && (foto.dirty || foto.touched)">
+            <div *ngIf="foto.errors.required">
+             El campo Fotografía no puede estar vacío
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="row col-sm-6">
+          <button
+            class="btn btn-primary"
+            role="button"
+            (click)='create()'
+            *ngIf="!inspeccion.id else elseBlock"
+            [disabled]="!inpeccionForm.form.valid"
+          >Crear</button>
+         
+          <div>  
+            <button class="btn btn-primary" role="button" [routerLink]= "['/inspecciones']">Volver</button>
+          </div>
+
+          <ng-template #elseBlock>
+            <button
+              class="btn btn-primary"
+              role="button"
+              (click)='update()'
+              [disabled]="!inpeccionForm.form.valid"
+            >Editar</button>
+          </ng-template>
+        </div>
+      </div> 
+    </form>
+  </div>
+</div>

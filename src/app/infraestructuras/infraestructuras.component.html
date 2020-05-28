@@ -1,0 +1,82 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Infraestructura</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Infraestructuras</h5>
+
+    <div class="my-2 text-left">
+      <button
+        class="btn btn-rounded btn-primary"
+        type="button"
+        [routerLink]="['/infraestructuras/form-inf']"
+      >
+        Añadir Infraestructura
+      </button>
+    </div>
+
+    <div *ngIf="infraestructura?.length == 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+
+    <table
+      class="table table-bordered table-striped"
+      *ngIf="infraestructura?.length > 0"
+    >
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Razón social</th>
+          <th>Tramo</th>
+          <th>Tipo estructura</th>
+          <th>Nombre estructura</th>
+          <th>Kilómetro</th>
+          <th>Región</th>
+          <th>Provincia</th>
+          <th>Visita</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let infraestructuras of infraestructura
+          "
+        >
+          <td>{{ infraestructuras.id }}</td>
+          <td>{{ infraestructuras.cliente.rSocial }}</td>
+          <td>{{ infraestructuras.tramo }}</td>
+          <td>{{ infraestructuras.tipoEstructura.estructura }}</td>
+          <td>{{ infraestructuras.nombreEstructura }}</td>
+          <td>{{ infraestructuras.kilometro }}</td>
+          <td>{{ infraestructuras.region.nombre_region }}</td>
+          <td>{{ infraestructuras.provincia.nombre_provincia }}</td>
+          <td>{{ infraestructuras.visita.tipo_visita }}</td>
+
+          <td>
+            <button
+              type="button"
+              name="editar"
+              [routerLink]="['/infraestructuras/form-inf', infraestructuras.id]"
+              class="btn btn-primary btn-sm"
+            >
+              editar
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              name="eliminar"
+              (click)="delete(infraestructuras)"
+              class="btn btn-danger btn-sm"
+            >
+              eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div></div>
+  </div>
+</div>
+

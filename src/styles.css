@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+html{
+    position: relative;
+    min-height: 100%;    
+    font-family: "Lucida Sans", sans-serif;
+}
+body {
+    margin-bottom: 60px;
+    background-color: darkgrey;
+}
+
+.wrap{
+    padding-bottom: 60px;
+}
+
+
+html, body { height: 100%; }
+
+
+@media screen and (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+      }
+
+}
+
+.centrado{text-align:center}
+		
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
